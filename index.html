@@ -166,179 +166,199 @@
   <br>
   <script>
     function calcularSimplesNacional() {
-      let rbt12 = parseFloat(document.getElementById("rendabruta").value.replace(/\D/g, ''));
-      let folhafucnionario = parseFloat(document.getElementById("folhafuncionario").value.replace(/\D/g, ''));
 
-      let fatorR = (folhafucnionario / rbt12) * 100;
 
-      let anexo;
-      if (fatorR >= 28) {
-        anexo = "III";
-      } else {
-        anexo = "V";
-      }
+      //validador de campos
+      let campo1 = parseFloat(document.getElementById("rendabruta").value.replace(/\D/g, ''));
+      let campo2 = parseFloat(document.getElementById("folhafuncionario").value.replace(/\D/g, ''));
+      let campo3 = parseFloat(document.getElementById("valorMesAtual").value.replace(/\D/g, ''));
 
-      let faixa = encontrarFaixa(rbt12, anexo);
+      console.log("Campos");
+      console.log(campo1);
+      console.log(campo2);
+      console.log(campo3);
 
-      // Verificar se a faixa foi encontrada
-      if (faixa) {
-        let aliquota = faixa.aliquota;
-        let parcelaADeduzir = faixa.parcelaADeduzir;
 
-        // Cálculo do valor final do Simples Nacional
-        let valorMesAtual = parseFloat(document.getElementById("valorMesAtual").value.replace(/\D/g, ''));
+      if (!isNaN(campo1)) {
+        if (!isNaN(campo2)) {
+          if (!isNaN(campo3)) {
 
 
 
+            let rbt12 = parseFloat(document.getElementById("rendabruta").value.replace(/\D/g, ''));
+            let folhafucnionario = parseFloat(document.getElementById("folhafuncionario").value.replace(/\D/g, ''));
 
-        let AliquotaEfetiva = ((rbt12 * aliquota) - parcelaADeduzir) / rbt12
+            let fatorR = (folhafucnionario / rbt12) * 100;
 
-        let AliquotaEfetivaAjustada = AliquotaEfetiva.toLocaleString('pt-BR', {
-          minimumFractionDigits: 2,
-          maximumFractionDigits: 2
-        });
+            let anexo;
+            if (fatorR >= 28) {
+              anexo = "III";
+            } else {
+              anexo = "V";
+            }
 
-        console.log(AliquotaEfetivaAjustada);
+            let faixa = encontrarFaixa(rbt12, anexo);
 
-        let valorSimples = (parseFloat(AliquotaEfetivaAjustada) * parseFloat(valorMesAtual)) / 10000;
-        let valorSimplesParaCalculoFinal = (parseFloat(AliquotaEfetivaAjustada) * parseFloat(valorMesAtual)) / 100;
+            // Verificar se a faixa foi encontrada
+            if (faixa) {
+              let aliquota = faixa.aliquota;
+              let parcelaADeduzir = faixa.parcelaADeduzir;
 
-        console.log("valor simples nacional: ");
-        console.log(valorSimples);
-
-
-
-
-
-        let formatadoValorSimples = valorSimples.toLocaleString('pt-BR', {
-          style: 'currency',
-          currency: 'BRL'
-        });
-
-        let formatadoAliquota = aliquota.toLocaleString('pt-BR', {
-          minimumFractionDigits: 2,
-          maximumFractionDigits: 2
-        }) + "%";
-
-        let formatadoAliquotaEfetiva = AliquotaEfetiva.toLocaleString('pt-BR', {
-          minimumFractionDigits: 2,
-          maximumFractionDigits: 2
-        }) + "%";
-
-        let formatadoParcelaADeduzir = parcelaADeduzir.toLocaleString('pt-BR', {
-          style: 'currency',
-          currency: 'BRL'
-        });
-
-        //pró-labore é sempre equivalente a 28% do valor bruto recebido no mes atual
-        //inss é sempre 11% do valor do pró-labore
+              // Cálculo do valor final do Simples Nacional
+              let valorMesAtual = parseFloat(document.getElementById("valorMesAtual").value.replace(/\D/g, ''));
 
 
-        console.log("iniciando calcula do irrf");
-        console.log("Valor bruto do mês atual: ");
-        console.log(valorMesAtual);
-        let prolabore = ((valorMesAtual / 100) * 28);
-        console.log("pró-labore de 28% do valor bruto do mês atual:");
-        console.log(prolabore);
-        let inss = ((prolabore / 100) * 11);
-        console.log("INSS de 11% do valor do pró-labore:");
-        console.log(inss);
-        let aliquota_do_irrf_porcentagem;
-        let parcela_a_deduzir_do_irr;
 
 
-        //regra da porcetagem do imposto do irrf e valor da parcela a deduzir
+              let AliquotaEfetiva = ((rbt12 * aliquota) - parcelaADeduzir) / rbt12
+
+              let AliquotaEfetivaAjustada = AliquotaEfetiva.toLocaleString('pt-BR', {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2
+              });
+
+              console.log(AliquotaEfetivaAjustada);
+
+              let valorSimples = (parseFloat(AliquotaEfetivaAjustada) * parseFloat(valorMesAtual)) / 10000;
+              let valorSimplesParaCalculoFinal = (parseFloat(AliquotaEfetivaAjustada) * parseFloat(valorMesAtual)) /
+              100;
+
+              console.log("valor simples nacional: ");
+              console.log(valorSimples);
 
 
-        if (prolabore <= 225920) {
-          aliquota_do_irrf_porcentagem = 0;
-          parcela_a_deduzir_do_irrf = 0;
-          console.log(
-            `Pró-labore maior ao igual a R$2.259,20 \n aliquota: ${aliquota_do_irrf_porcentagem} \n Parcela à deduzir do IRRF: ${parcela_a_deduzir_do_irrf} `
-          );
-        }
-        if (prolabore > 225921 && prolabore <= 282665) {
-          aliquota_do_irrf_porcentagem = 7.5;
-          parcela_a_deduzir_do_irrf = 16944;
-          console.log(
-            `Pró-labore maior que R$2.259,21 e menor que R$2.826,65 \n aliquota: ${aliquota_do_irrf_porcentagem} \n Parcela à deduzir do IRRF: ${parcela_a_deduzir_do_irrf} `
-          );
-        }
-
-        if (prolabore > 282666 && prolabore <= 375105) {
-          aliquota_do_irrf_porcentagem = 15;
-          parcela_a_deduzir_do_irrf = 38144;
-          console.log(
-            `Pró-labore maior que R$2.826,66 e menor que R$3.751,05 \n aliquota: ${aliquota_do_irrf_porcentagem} \n Parcela à deduzir do IRRF: ${parcela_a_deduzir_do_irrf} `
-          );
-        }
-
-        if (prolabore > 375106 && prolabore <= 466468) {
-          aliquota_do_irrf_porcentagem = 22.5;
-          parcela_a_deduzir_do_irrf = 66277;
-          console.log(
-            `Pró-labore maior que R$3.751,06 e menor que R$4.664,68 \n aliquota: ${aliquota_do_irrf_porcentagem} \n Parcela à deduzir do IRRF: ${parcela_a_deduzir_do_irrf} `
-          );
-        }
-
-        if (prolabore > 466468) {
-          aliquota_do_irrf_porcentagem = 27.5;
-          parcela_a_deduzir_do_irrf = 89600;
-          console.log(
-            `Pró-labore maior que R$4.664,68 \n aliquota: ${aliquota_do_irrf_porcentagem} \n Parcela à deduzir do IRRF: ${parcela_a_deduzir_do_irrf} `
-          );
-        }
 
 
-        function formatarValor(valor) {
-          // Dividir o valor por 100 para obter o valor real em reais e centavos
-          let valorFloat = (valor / 100).toFixed(2);
 
-          // Separar a parte inteira e a parte decimal
-          let [inteira, decimal] = valorFloat.split('.');
+              let formatadoValorSimples = valorSimples.toLocaleString('pt-BR', {
+                style: 'currency',
+                currency: 'BRL'
+              });
 
-          // Adicionar os pontos a cada três dígitos na parte inteira
-          inteira = inteira.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+              let formatadoAliquota = aliquota.toLocaleString('pt-BR', {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2
+              }) + "%";
 
-          // Juntar a parte inteira e decimal com uma vírgula
-          return inteira + ',' + decimal;
-        }
+              let formatadoAliquotaEfetiva = AliquotaEfetiva.toLocaleString('pt-BR', {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2
+              }) + "%";
 
-        // Exemplo de uso
-        let valor = 47460;
-        let valorFormatado = formatarValor(valor);
-        console.log(valorFormatado); // Saída: "474,60"
+              let formatadoParcelaADeduzir = parcelaADeduzir.toLocaleString('pt-BR', {
+                style: 'currency',
+                currency: 'BRL'
+              });
 
-
-        //prolabore menos inss vezes aliquota do irrf menos a parcela a deduzir do irrf
-
-        let irrf = ((((prolabore - inss) / 100) * aliquota_do_irrf_porcentagem) - parcela_a_deduzir_do_irrf);
-        console.log('Valor do IRRF:');
-        console.log(irrf);
+              //pró-labore é sempre equivalente a 28% do valor bruto recebido no mes atual
+              //inss é sempre 11% do valor do pró-labore
 
 
-        //formantando valores pra fica bonito
-
-        let formatadoValorProlabore = (parseInt((prolabore).toString().slice(0, -2))).toLocaleString('pt-BR', {
-          style: 'currency',
-          currency: 'BRL'
-        });
-
-
-        let formatadoValorINSS = (parseInt((inss).toString().slice(0, -2))).toLocaleString('pt-BR', {
-          style: 'currency',
-          currency: 'BRL'
-        });
-
-
-        let formatadoValorIRRF = formatarValor(irrf);
-
-        let total_de_impostos = formatarValor(valorSimplesParaCalculoFinal + inss + irrf);
-
-        console.log(`valor vindo da variavel "valorSimples" = '${valorSimplesParaCalculoFinal}' `);
+              console.log("iniciando calcula do irrf");
+              console.log("Valor bruto do mês atual: ");
+              console.log(valorMesAtual);
+              let prolabore = ((valorMesAtual / 100) * 28);
+              console.log("pró-labore de 28% do valor bruto do mês atual:");
+              console.log(prolabore);
+              let inss = ((prolabore / 100) * 11);
+              console.log("INSS de 11% do valor do pró-labore:");
+              console.log(inss);
+              let aliquota_do_irrf_porcentagem;
+              let parcela_a_deduzir_do_irr;
 
 
-        document.getElementById("resultado").innerHTML = `
+              //regra da porcetagem do imposto do irrf e valor da parcela a deduzir
+
+
+              if (prolabore <= 225920) {
+                aliquota_do_irrf_porcentagem = 0;
+                parcela_a_deduzir_do_irrf = 0;
+                console.log(
+                  `Pró-labore maior ao igual a R$2.259,20 \n aliquota: ${aliquota_do_irrf_porcentagem} \n Parcela à deduzir do IRRF: ${parcela_a_deduzir_do_irrf} `
+                );
+              }
+              if (prolabore > 225921 && prolabore <= 282665) {
+                aliquota_do_irrf_porcentagem = 7.5;
+                parcela_a_deduzir_do_irrf = 16944;
+                console.log(
+                  `Pró-labore maior que R$2.259,21 e menor que R$2.826,65 \n aliquota: ${aliquota_do_irrf_porcentagem} \n Parcela à deduzir do IRRF: ${parcela_a_deduzir_do_irrf} `
+                );
+              }
+
+              if (prolabore > 282666 && prolabore <= 375105) {
+                aliquota_do_irrf_porcentagem = 15;
+                parcela_a_deduzir_do_irrf = 38144;
+                console.log(
+                  `Pró-labore maior que R$2.826,66 e menor que R$3.751,05 \n aliquota: ${aliquota_do_irrf_porcentagem} \n Parcela à deduzir do IRRF: ${parcela_a_deduzir_do_irrf} `
+                );
+              }
+
+              if (prolabore > 375106 && prolabore <= 466468) {
+                aliquota_do_irrf_porcentagem = 22.5;
+                parcela_a_deduzir_do_irrf = 66277;
+                console.log(
+                  `Pró-labore maior que R$3.751,06 e menor que R$4.664,68 \n aliquota: ${aliquota_do_irrf_porcentagem} \n Parcela à deduzir do IRRF: ${parcela_a_deduzir_do_irrf} `
+                );
+              }
+
+              if (prolabore > 466468) {
+                aliquota_do_irrf_porcentagem = 27.5;
+                parcela_a_deduzir_do_irrf = 89600;
+                console.log(
+                  `Pró-labore maior que R$4.664,68 \n aliquota: ${aliquota_do_irrf_porcentagem} \n Parcela à deduzir do IRRF: ${parcela_a_deduzir_do_irrf} `
+                );
+              }
+
+
+              function formatarValor(valor) {
+                // Dividir o valor por 100 para obter o valor real em reais e centavos
+                let valorFloat = (valor / 100).toFixed(2);
+
+                // Separar a parte inteira e a parte decimal
+                let [inteira, decimal] = valorFloat.split('.');
+
+                // Adicionar os pontos a cada três dígitos na parte inteira
+                inteira = inteira.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+
+                // Juntar a parte inteira e decimal com uma vírgula
+                return inteira + ',' + decimal;
+              }
+
+              // Exemplo de uso
+              let valor = 47460;
+              let valorFormatado = formatarValor(valor);
+              console.log(valorFormatado); // Saída: "474,60"
+
+
+              //prolabore menos inss vezes aliquota do irrf menos a parcela a deduzir do irrf
+
+              let irrf = ((((prolabore - inss) / 100) * aliquota_do_irrf_porcentagem) - parcela_a_deduzir_do_irrf);
+              console.log('Valor do IRRF:');
+              console.log(irrf);
+
+
+              //formantando valores pra fica bonito
+
+              let formatadoValorProlabore = (parseInt((prolabore).toString().slice(0, -2))).toLocaleString('pt-BR', {
+                style: 'currency',
+                currency: 'BRL'
+              });
+
+
+              let formatadoValorINSS = (parseInt((inss).toString().slice(0, -2))).toLocaleString('pt-BR', {
+                style: 'currency',
+                currency: 'BRL'
+              });
+
+
+              let formatadoValorIRRF = formatarValor(irrf);
+
+              let total_de_impostos = formatarValor(valorSimplesParaCalculoFinal + inss + irrf);
+
+              console.log(`valor vindo da variavel "valorSimples" = '${valorSimplesParaCalculoFinal}' `);
+
+
+              document.getElementById("resultado").innerHTML = `
           <h1>Anexo ${anexo}</h1>
           <p>Fator R:  ${fatorR.toFixed(2)}%</p>
           <p>Alíquota: ${formatadoAliquota}</p>
@@ -353,8 +373,22 @@
         `;
 
 
+            } else {
+              alert("A receita bruta informada não se encaixa em nenhuma faixa do anexo.");
+            }
+
+
+          } else {
+            var valormesatualinvalido = document.getElementById("valorMesAtual").value;
+            alert(`Valor Valor do mês atual, Invalido "${valormesatualinvalido}", Por favor, Tente novamente.`);
+          }
+        } else {
+          var folhafuncionarionvalido = document.getElementById("folhafuncionario").value;
+          alert(`Valor Folha do(s) Funcario(s)  Invalido "${folhafuncionarionvalido}", Por favor, Tente novamente.`);
+        }
       } else {
-        alert("A receita bruta informada não se encaixa em nenhuma faixa do anexo.");
+        var rendaBrutainvalido = document.getElementById("rendabruta").value;
+        alert(`Valor Renda Bruta Invalido "${rendaBrutainvalido}", Por favor, Tente novamente.`);
       }
     }
 
