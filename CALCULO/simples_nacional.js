@@ -2,9 +2,9 @@ export const calcularSimplesNacional = async (campo_1, campo_2, campo_3) => {
 
 console.log("Iniciando função de calcular o simples nacional ");
     //validador de campos
-    let campo1 = parseFloat((campo_1).value.replace(/\D/g, ''));
-    let campo2 = parseFloat((campo_2).value.replace(/\D/g, ''));
-    let campo3 = parseFloat((campo_3).value.replace(/\D/g, ''));
+    let campo1 = parseFloat((campo_1).value.split(/\D/g).join(''));
+    let campo2 = parseFloat((campo_2).value.split(/\D/g).join(''));
+    let campo3 = parseFloat((campo_3).value.split(/\D/g).join(''));
 
     console.log("Campos");
     console.log(campo1);
@@ -18,8 +18,8 @@ console.log("Iniciando função de calcular o simples nacional ");
 
 
 
-          let receita_bruta_ultimos_12_meses = parseFloat(document.getElementById("rendabruta").value.replace(/\D/g, ''));
-          let folhafucnionario = parseFloat(document.getElementById("folhafuncionario").value.replace(/\D/g, ''));
+          let receita_bruta_ultimos_12_meses = campo1;
+          let folhafucnionario = campo2;
 
           let fatorR = (folhafucnionario / receita_bruta_ultimos_12_meses) * 100;
 
@@ -38,7 +38,7 @@ console.log("Iniciando função de calcular o simples nacional ");
             let parcelaADeduzir = faixa.parcelaADeduzir;
 
             // Cálculo do valor final do Simples Nacional
-            let valorMesAtual = parseFloat(document.getElementById("valorMesAtual").value.replace(/\D/g, ''));
+            let valorMesAtual = campo3;
 
             let AliquotaEfetiva = ((((receita_bruta_ultimos_12_meses / 100) * aliquota) - parcelaADeduzir) / receita_bruta_ultimos_12_meses) * 100
             console.log("o calculo completo deu:")
@@ -55,7 +55,7 @@ console.log("Iniciando função de calcular o simples nacional ");
             console.log("Aliquota efetiva depois de ajustada:::")
             console.log(AliquotaEfetivaAjustada);
 
-            AliquotaEfetivaAjustada = AliquotaEfetivaAjustada.replace(',','.');
+            AliquotaEfetivaAjustada = AliquotaEfetivaAjustada.split(',').join('.');
 
             console.log('resolvendo virgula da aliquota efetiva:')
             console.log(AliquotaEfetivaAjustada);
@@ -159,7 +159,7 @@ console.log("Iniciando função de calcular o simples nacional ");
               let [inteira, decimal] = valorFloat.split('.');
 
               // Adicionar os pontos a cada três dígitos na parte inteira
-              inteira = inteira.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+              inteira = inteira.split(/\B(?=(\d{3})+(?!\d))/g).join('.');
 
               // Juntar a parte inteira e decimal com uma vírgula
               return inteira + ',' + decimal;
@@ -216,21 +216,18 @@ console.log("Iniciando função de calcular o simples nacional ");
           return result;
 
           } else {
-            alert("A receita bruta informada não se encaixa em nenhuma faixa do anexo.");
+            console.log("A receita bruta informada não se encaixa em nenhuma faixa do anexo.");
           }
 
 
         } else {
-          var valormesatualinvalido = document.getElementById("valorMesAtual").value;
-          alert(`Valor Valor do mês atual, Invalido "${valormesatualinvalido}", Por favor, Tente novamente.`);
+          console.log(`Valor Valor do mês atual, Invalido "${campo3}", Por favor, Tente novamente.`);
         }
       } else {
-        var folhafuncionarionvalido = document.getElementById("folhafuncionario").value;
-        alert(`Valor Folha do(s) Funcario(s)  Invalido "${folhafuncionarionvalido}", Por favor, Tente novamente.`);
+        console.log(`Valor Folha do(s) Funcario(s)  Invalido "${campo2}", Por favor, Tente novamente.`);
       }
     } else {
-      var rendaBrutainvalido = document.getElementById("rendabruta").value;
-      alert(`Valor Renda Bruta Invalido "${rendaBrutainvalido}", Por favor, Tente novamente.`);
+      console.log(`Valor Renda Bruta Invalido "${campo1}", Por favor, Tente novamente.`);
     }
   }
 
