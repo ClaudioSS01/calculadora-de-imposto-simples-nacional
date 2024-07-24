@@ -2,9 +2,9 @@ export const calcularSimplesNacional = async (campo_1, campo_2, campo_3) => {
 
 console.log("Iniciando função de calcular o simples nacional ");
     //validador de campos
-    let campo1 = parseFloat((campo_1).value.split(/\D/g).join(''));
-    let campo2 = parseFloat((campo_2).value.split(/\D/g).join(''));
-    let campo3 = parseFloat((campo_3).value.split(/\D/g).join(''));
+    let campo1 = parseFloat(campo_1.split(/\D/g).join(''));
+    let campo2 = parseFloat(campo_2.split(/\D/g).join(''));
+    let campo3 = parseFloat(campo_3.split(/\D/g).join(''));
 
     console.log("Campos");
     console.log(campo1);
