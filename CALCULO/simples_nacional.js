@@ -1,6 +1,6 @@
 export const calcularSimplesNacional = async (campo_1, campo_2, campo_3) => {
 
-
+console.log("Iniciando função de calcular o simples nacional ");
     //validador de campos
     let campo1 = parseFloat((campo_1).value.replace(/\D/g, ''));
     let campo2 = parseFloat((campo_2).value.replace(/\D/g, ''));
@@ -210,6 +210,9 @@ export const calcularSimplesNacional = async (campo_1, campo_2, campo_3) => {
         <p><b>Valor Total de impostos à pagar: R$ ${ total_de_impostos }</b>
       `;
 
+
+      console.log("Resultado do calculo: ");
+      console.log(result);
           return result;
 
           } else {

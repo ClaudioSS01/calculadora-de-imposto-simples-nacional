@@ -28,6 +28,7 @@ app.use(express.json());
 
 // Definição das rotas
 app.post('/calculo_simples_nacional', async (req, res) => {
+    console.log(" \n iniciando calculo do simples nacional via api \n dados recebido no body da api: \n ");
     console.log(req.body);
     try {
         const result = await calcularSimplesNacional(req.body.campo_1, req.body.campo_2, req.body.campo_3);
