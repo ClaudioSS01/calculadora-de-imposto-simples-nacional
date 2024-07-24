@@ -1,0 +1,12 @@
+{
+  "name": "calculadora-de-imposto",
+  "version": "1.0.0",
+  "description": "Calculadora de impostos",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
