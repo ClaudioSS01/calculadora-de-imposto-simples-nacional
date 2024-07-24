@@ -33,7 +33,7 @@ app.post('/calculo_simples_nacional', async (req, res) => {
     try {
         const result = await calcularSimplesNacional(req.body.campo_1, req.body.campo_2, req.body.campo_3);
         console.log(result);
-        res.send(`{"body":"${result}"}`);
+        res.send(`${result}`);
     } catch (error) {
         console.log(error);
         res.status(500).send('Erro ao processar consulta');

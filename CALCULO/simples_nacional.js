@@ -197,17 +197,17 @@ console.log("Iniciando função de calcular o simples nacional ");
 
 
             let result = `
-        <h1>Anexo ${anexo}</h1>
-        <p>Fator R:  ${fatorR.toFixed(2)}%</p>
-        <p>Alíquota: ${formatadoAliquota}</p>
-        <p>Parcela a Deduzir: ${formatadoParcelaADeduzir}</p>
-        <p>Alíquota Efetiva: ${formatadoAliquotaEfetiva}</p>
-        <P>Valor do pró-labore: ${formatadoValorProlabore}</p>
-        <p>Valor do Simples Nacional: ${formatadoValorSimples}</p>
-        <p>Valor do INSS à pagar: R$ ${formatadoValorINSS}</p>
-        <p>Valor do IRRF: R$ ${formatadoValorIRRF}</p>
-        <hr />
-        <p><b>Valor Total de impostos à pagar: R$ ${ total_de_impostos }</b>
+        Anexo ${anexo}
+        Fator R:  ${fatorR.toFixed(2)}%
+        Alíquota: ${formatadoAliquota}
+        Parcela a Deduzir: ${formatadoParcelaADeduzir}
+        Alíquota Efetiva: ${formatadoAliquotaEfetiva}
+        Valor do pró-labore: ${formatadoValorProlabore}
+        Valor do Simples Nacional: ${formatadoValorSimples}
+        Valor do INSS à pagar: R$ ${formatadoValorINSS}
+        Valor do IRRF: R$ ${formatadoValorIRRF}
+        
+        Valor Total de impostos à pagar: R$ ${ total_de_impostos }
       `;
 
 
