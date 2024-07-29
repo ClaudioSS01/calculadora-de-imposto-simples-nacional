@@ -154,21 +154,26 @@ console.log("Iniciando função de calcular o simples nacional ");
             function formatarValor(valor) {
               // Dividir o valor por 100 para obter o valor real em reais e centavos
               let valorFloat = (valor / 100).toFixed(2);
-
+          
+              console.log(`valorFloat "${valorFloat}"`);
+          
               // Separar a parte inteira e a parte decimal
               let [inteira, decimal] = valorFloat.split('.');
-
+          
+              console.log(`inteira "${inteira}"`);
+              console.log(`decimal "${decimal}"`);
+          
               // Adicionar os pontos a cada três dígitos na parte inteira
-              inteira = inteira.split(/\B(?=(\d{3})+(?!\d))/g).join('.');
-
+              inteira = inteira.split(/(?=(?:\d{3})+(?:\.|$))/g).join('.');
+          
+              console.log(`inteira "${inteira}"`);
+          
+              console.log(`final inteira "${inteira},${decimal}"`);
+          
               // Juntar a parte inteira e decimal com uma vírgula
               return inteira + ',' + decimal;
-            }
+          }
 
-            // Exemplo de uso
-            let valor = 47460;
-            let valorFormatado = formatarValor(valor);
-            console.log(valorFormatado); // Saída: "474,60"
 
 
             //prolabore menos inss vezes aliquota do irrf menos a parcela a deduzir do irrf
