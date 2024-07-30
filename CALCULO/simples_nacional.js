@@ -201,19 +201,7 @@ console.log("Iniciando função de calcular o simples nacional ");
             console.log(`valor vindo da variavel "valorSimples" = '${valorSimplesParaCalculoFinal}' `);
 
 
-            let result = `
-        Anexo ${anexo}
-        Fator R:  ${fatorR.toFixed(2)}%
-        Alíquota: ${formatadoAliquota}
-        Parcela a Deduzir: ${formatadoParcelaADeduzir}
-        Alíquota Efetiva: ${formatadoAliquotaEfetiva}
-        Valor do pró-labore: ${formatadoValorProlabore}
-        Valor do Simples Nacional: ${formatadoValorSimples}
-        Valor do INSS à pagar: R$ ${formatadoValorINSS}
-        Valor do IRRF: R$ ${formatadoValorIRRF}
-        
-        Valor Total de impostos à pagar: R$ ${ total_de_impostos }
-      `;
+            let result = ` Anexo ${anexo} * Fator R:  ${fatorR.toFixed(2)}% * Alíquota: ${formatadoAliquota} * Parcela a Deduzir: ${formatadoParcelaADeduzir} * Alíquota Efetiva: ${formatadoAliquotaEfetiva} * Valor do pró-labore: ${formatadoValorProlabore} * Valor do Simples Nacional: ${formatadoValorSimples} * Valor do INSS à pagar: R$ ${formatadoValorINSS} * Valor do IRRF: R$ ${formatadoValorIRRF} * Valor Total de impostos à pagar: R$ ${ total_de_impostos }`;
 
 
       console.log("Resultado do calculo: ");
